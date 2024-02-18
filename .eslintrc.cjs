@@ -53,5 +53,8 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'max-len': ['error', { ignoreComments: true, code: 120 }],
         'no-param-reassign': 'off',
+        'jsx-a11y/control-has-associated-label': 'off',
+        'arrow-body-style': 'off',
+        'react/prefer-stateless-function': 'off'
     }
 }

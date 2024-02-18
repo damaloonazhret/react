@@ -1,0 +1,9 @@
+@import 'reset';
+@import './variables/global';
+@import './background';
+
+body {
+  font: var(--font-family-main);
+  color: var(--primary-color);
+  background: var(--background-color);
+}
