@@ -55,6 +55,7 @@ module.exports = {
         'no-param-reassign': 'off',
         'jsx-a11y/control-has-associated-label': 'off',
         'arrow-body-style': 'off',
-        'react/prefer-stateless-function': 'off'
+        'react/prefer-stateless-function': 'off',
+        'no-console': 'off',
     }
 }

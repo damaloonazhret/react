@@ -1,9 +1,10 @@
 import {Component} from "react";
 import {ISearchState, Search} from "../widgets/Search/Search.tsx";
-import {CardContainer, ICharacter} from "../widgets/CardContainer/CardContainer.tsx";
-import {ICardState} from "../widgets/CardContainer/Card/Card.tsx";
+import {CardContainer, ICardState} from "../widgets/CardContainer/CardContainer.tsx";
+import {getRoot} from "../features/getRoot/getRoot.tsx";
+import {getPeople} from "../features/getPeople/getPeople.tsx";
 
-interface IMain extends ISearchState, ICardState{};
+interface IMain extends ISearchState, ICardState{}
 
 class MainPage extends Component<NonNullable<unknown>, IMain> {
 
@@ -11,37 +12,30 @@ class MainPage extends Component<NonNullable<unknown>, IMain> {
         super(props);
         this.state = {
             keys: [],
-            items: []
+            characters: []
         }
     }
 
-    componentDidMount() {
-        fetch('https://swapi.dev/api/')
-            .then(r => r.json())
-            .then(data => {
-                const keys = Object.keys(data);
-                this.setState({keys})
-            })
-            .catch(error => {
-                console.error('Ошибка при выполнении запроса:', error);
-            });
-        fetch('https://swapi.dev/api/people/?page=1')
-            .then(r => r.json())
-            .then(data => {
-                const characters = data.results;
-                this.setState({ items: characters });
-            })
-            .catch(error => {
-                console.error('Ошибка при выполнении запроса:', error);
-            });
+    async componentDidUpdate(prevState) {
+        const {characters, keys} = this.state;
+        if (prevState.keys !== keys) {
+            const keys = await getRoot();
+            this.setState({keys});
+        }
+        if (prevState.keys !== characters) {
+            const characters = await getPeople();
+            this.setState({characters})
+        }
+        console.log('asfd')
     }
 
+
     render() {
-        const {keys, items} = this.state;
+        const {keys, characters} = this.state;
         return (
             <section className='bg'>
                 <Search keys={keys}/>
-                <CardContainer items={items}/>
+                <CardContainer characters={characters}/>
             </section>
         );
     }

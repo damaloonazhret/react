@@ -8,10 +8,8 @@ export interface ISearchState {
 
 export class Search extends Component<ISearchState> {
 
-    // eslint-disable-next-line class-methods-use-this
-
     render() {
-        const { keys } = this.props;
+        const { keys = [] } = this.props;
         return (
             <nav className={style.search}>
                 <input className={style.input} type="text" placeholder='Search...'/>

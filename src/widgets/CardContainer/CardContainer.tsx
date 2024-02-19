@@ -1,8 +1,6 @@
 import {Component} from "react";
 import style from './CardContainer.module.scss'
-import {Card, ICardState} from "./Card/Card.tsx";
-
-// eslint-disable-next-line react/prefer-stateless-function
+import {Card} from "./Card/Card.tsx";
 
 export interface ICharacter {
     name: string;
@@ -27,14 +25,17 @@ interface ICard {
     card: Partial<ICharacter>
 }
 
+export interface ICardState {
+    characters: Array<ICharacter>;
+}
 
 export class CardContainer extends Component<ICardState, ICard> {
 
     render() {
-        const {items} = this.props;
+        const {characters= []} = this.props;
         return (
             <aside className={style.cardBox} >
-                {items.map((el) => (
+                {characters.map((el: ICharacter) => (
                     <Card key={el.url} {...el}/>
                 ))}
             </aside>

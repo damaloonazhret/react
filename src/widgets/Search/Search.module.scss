@@ -32,11 +32,13 @@
   grid-column: 1 / 3;
   justify-items: center;
   grid-auto-flow: column;
-  gap: 15px;
+  gap: 25px;
   padding: 10px;
   & > li {
     cursor: pointer;
     width: 100%;
     text-align: center;
+    border: 1px solid var(--primary-color);
+    padding: 5px;
   }
 }
